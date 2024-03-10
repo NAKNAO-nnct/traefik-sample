@@ -1,0 +1,18 @@
+http:
+  routers:
+    chinach:
+      entryPoints:
+        - websecure
+      rule: Host(`chinachu.int.misosiru.uk`)
+      service: chinach
+      tls:
+        certResolver: cloudflare
+        domains:
+          - main: "int.misosiru.uk"
+            sans:
+              - "*.int.misosiru.uk"
+  services:
+    chinach:
+      loadBalancer:
+        servers:
+        - url: "http://192.168.210.31:10772/"
